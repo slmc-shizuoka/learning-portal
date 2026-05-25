@@ -1,593 +1,1298 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>静岡Branch学習ポータル</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@700;900&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #fffdf7;
-      --ink: #1a1a1a;
-      --marker-yellow: #ffe444;
-      --marker-pink: #ff6eb4;
-      --marker-green: #4ddc7a;
-      --marker-blue: #44c8ff;
-      --marker-orange: #ff8c42;
-      --marker-purple: #c084fc;
-      --marker-red: #ff4d6d;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHIZUOKA LEARNING PORTAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #ff2d87;
+  --blue: #00b9ff;
+  --lime: #d4ff00;
+  --sun: #ffd400;
+  --orange: #ff6b00;
+  --violet: #8b5cf6;
+  --cream: #fff8e7;
+  --ink: #0a0a0a;
+  --white: #ffffff;
+  --gray-100: #f3f1ec;
+  --gray-300: #d4d1c8;
+  --gray-500: #8b8880;
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* Category colors */
+  --c-gen: #ff2d87;
+  --c-agent: #8b5cf6;
+  --c-skill: #00b9ff;
+  --c-create: #ff6b00;
+  --c-mobile: #d4ff00;
+  --c-pcd: #ffd400;
+}
 
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .bg-pattern {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background-image: radial-gradient(circle 1.5px at 1.5px 1.5px, rgba(0,0,0,0.07) 100%, transparent);
-      background-size: 32px 32px;
-    }
+html { scroll-behavior: smooth; }
 
-    .wrapper {
-      position: relative;
-      z-index: 2;
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
 
-    /* ===== HEADER ===== */
-    header {
-      padding: 3.2rem 0 1.2rem;
-      text-align: center;
-    }
+/* ====== HEADER ====== */
+.header {
+  background: var(--white);
+  border-bottom: 3px solid var(--ink);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-    .header-eyebrow {
-      display: inline-block;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: 0.72rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--ink);
-      background: var(--marker-yellow);
-      padding: 0.28rem 1rem;
-      border-radius: 3px;
-      margin-bottom: 1.2rem;
-      transform: rotate(-0.8deg);
-      animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
-    }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
 
-    .header-title {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-size: clamp(2rem, 6vw, 3.8rem);
-      font-weight: 900;
-      letter-spacing: 0.03em;
-      line-height: 1.18;
-      color: var(--ink);
-      animation: popIn 0.5s 0.08s cubic-bezier(0.34,1.56,0.64,1) both;
-    }
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--pink);
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bowlby One', sans-serif;
+  color: var(--white);
+  font-size: 18px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
 
-    .title-mark {
-      position: relative;
-      display: inline-block;
-    }
-    .title-mark::after {
-      content: '';
-      position: absolute;
-      bottom: 3px;
-      left: -3px;
-      right: -3px;
-      height: 11px;
-      background: var(--marker-pink);
-      opacity: 0.4;
-      z-index: -1;
-      border-radius: 3px;
-      transform: rotate(-0.4deg);
-    }
+.logo-text {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
 
-    .header-sub {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.88rem;
-      letter-spacing: 0.2em;
-      color: #999;
-      margin-top: 0.8rem;
-      animation: popIn 0.5s 0.15s cubic-bezier(0.34,1.56,0.64,1) both;
-    }
+.logo-text .small {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--pink);
+  display: block;
+  margin-top: 3px;
+}
 
-    .squiggle {
-      margin: 1.6rem auto 0;
-      width: 130px;
-      display: block;
-      animation: popIn 0.5s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
-    }
+/* Search */
+.search-box {
+  flex: 1;
+  max-width: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-    /* ===== SECTION ===== */
-    .section {
-      margin-bottom: 2.8rem;
-      animation: popIn 0.5s both;
-    }
-    .section:nth-child(1) { animation-delay: 0.25s; }
-    .section:nth-child(2) { animation-delay: 0.38s; }
-    .section:nth-child(3) { animation-delay: 0.5s; }
+.search-icon-left {
+  position: absolute;
+  left: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.1em;
+  pointer-events: none;
+}
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1.2rem;
-    }
+.search-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 70px 0 70px;
+  border: 2.5px solid var(--ink);
+  background: var(--white);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 0;
+  outline: none;
+  transition: box-shadow 0.15s;
+}
 
-    .section-tag {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 900;
-      font-size: 0.82rem;
-      letter-spacing: 0.1em;
-      color: var(--ink);
-      padding: 0.32rem 1rem;
-      border-radius: 100px;
-      border: 2.5px solid var(--ink);
-      white-space: nowrap;
-    }
+.search-input:focus {
+  background: var(--lime);
+  box-shadow: 3px 3px 0 var(--ink);
+}
 
-    .tag-ai    { background: var(--marker-blue);   }
-    .tag-pc    { background: var(--marker-green);  }
-    .tag-tel   { background: var(--marker-orange); }
-    .tag-sns   { background: var(--marker-pink);   }
-    .tag-depot { background: var(--marker-yellow); }
-    .tag-gov   { background: var(--marker-green);  }
+.search-input::placeholder {
+  color: var(--gray-500);
+}
 
-    .section-rule {
-      flex: 1;
-      height: 2.5px;
-      border-radius: 2px;
-      background: repeating-linear-gradient(
-        90deg,
-        var(--ink) 0px, var(--ink) 5px,
-        transparent 5px, transparent 10px
-      );
-      opacity: 0.1;
-    }
+.search-hint {
+  position: absolute;
+  right: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  background: var(--ink);
+  color: var(--lime);
+  padding: 3px 8px;
+  border-radius: 3px;
+  pointer-events: none;
+}
 
-    /* ===== CARD GRID ===== */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
-      gap: 1rem;
-    }
+.search-clear {
+  position: absolute;
+  right: 50px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--gray-500);
+  padding: 4px;
+  display: none;
+}
 
-    .card {
-      background: #fff;
-      border: 2.5px solid var(--ink);
-      border-radius: 18px;
-      padding: 1.5rem 0.8rem 1.2rem;
-      text-align: center;
-      text-decoration: none;
-      color: var(--ink);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      position: relative;
-      transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1),
-                  box-shadow 0.18s ease,
-                  background 0.15s ease;
-      box-shadow: 4px 4px 0 var(--ink);
-    }
+.search-clear.show { display: block; }
 
-    .card:hover {
-      transform: translate(-3px, -4px);
-      box-shadow: 7px 8px 0 var(--ink);
-    }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+}
 
-    .card-stripe {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 6px;
-      border-radius: 15px 15px 0 0;
-    }
+.view-toggle {
+  display: flex;
+  border: 2.5px solid var(--ink);
+}
 
-    .card[data-c="yellow"] .card-stripe { background: var(--marker-yellow); }
-    .card[data-c="pink"]   .card-stripe { background: var(--marker-pink);   }
-    .card[data-c="green"]  .card-stripe { background: var(--marker-green);  }
-    .card[data-c="blue"]   .card-stripe { background: var(--marker-blue);   }
-    .card[data-c="orange"] .card-stripe { background: var(--marker-orange); }
-    .card[data-c="purple"] .card-stripe { background: var(--marker-purple); }
-    .card[data-c="red"]    .card-stripe { background: var(--marker-red);    }
+.view-btn {
+  background: var(--white);
+  border: none;
+  padding: 6px 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background 0.1s;
+}
 
-    .card[data-c="yellow"]:hover { background: #fffbe6; }
-    .card[data-c="pink"]:hover   { background: #fff0f7; }
-    .card[data-c="green"]:hover  { background: #f0fff5; }
-    .card[data-c="blue"]:hover   { background: #f0faff; }
-    .card[data-c="orange"]:hover { background: #fff6ee; }
-    .card[data-c="purple"]:hover { background: #faf0ff; }
-    .card[data-c="red"]:hover    { background: #fff0f3; }
+.view-btn.active {
+  background: var(--ink);
+  color: var(--lime);
+}
 
-    .card-stamp {
-      position: absolute;
-      top: -9px; right: -9px;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      border: 2.5px solid var(--ink);
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 900;
-      font-size: 0.58rem;
-      z-index: 3;
-    }
+.view-btn + .view-btn { border-left: 2.5px solid var(--ink); }
 
-    .card-emoji {
-      font-size: 2rem;
-      line-height: 1;
-      margin-top: 0.2rem;
-    }
+.badge-online {
+  background: var(--lime);
+  border: 2px solid var(--ink);
+  padding: 3px 8px;
+  font-weight: 700;
+  font-size: 10px;
+}
 
-    .card-name {
-      font-family: 'Zen Maru Gothic', sans-serif;
-      font-weight: 900;
-      font-size: 0.93rem;
-    }
+.badge-online::before {
+  content: '●';
+  margin-right: 4px;
+  animation: blink 1.5s infinite;
+}
 
-    .card-badge {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      color: #bbb;
-      text-transform: uppercase;
-    }
+@keyframes blink { 50% { opacity: 0.3; } }
 
-    /* Simulator sub-card style */
-    .card-sub {
-      background: #fafafa;
-      border: 2px dashed var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .card-sub:hover {
-      box-shadow: 6px 7px 0 var(--ink);
-    }
+/* ====== TABS BAR ====== */
+.tabs-bar {
+  background: var(--white);
+  border-bottom: 3px solid var(--ink);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  position: sticky;
+  top: 70px;
+  z-index: 99;
+}
 
+.tabs-bar::-webkit-scrollbar { height: 0; }
 
+.tab {
+  background: var(--white);
+  border: 2.5px solid var(--ink);
+  padding: 7px 14px;
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+}
 
-    .spin-star {
-      display: inline-block;
-      font-size: 1.2rem;
-      animation: spin 5s linear infinite;
-      color: var(--marker-yellow);
-    }
+.tab:hover { background: var(--gray-100); }
 
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 2.5rem 0 2rem;
-      border-top: 2.5px dashed rgba(0,0,0,0.1);
-      margin-top: 1rem;
-    }
+.tab.active {
+  background: var(--ink);
+  color: var(--white);
+}
 
-    .footer-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-bottom: 0.7rem;
-    }
+.tab .tab-key {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  background: var(--lime);
+  color: var(--ink);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-weight: 700;
+}
 
-    .footer-dot {
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      border: 2px solid var(--ink);
-    }
+.tab.active .tab-key {
+  background: var(--lime);
+}
 
-    .footer-text {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: #ccc;
-    }
+.tab .tab-count {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  opacity: 0.7;
+  font-weight: 700;
+}
 
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.88) translateY(10px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+.tab-spacer { flex: 1; }
+
+.result-info {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--ink);
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.result-info span { color: var(--pink); }
+
+/* ====== MAIN ====== */
+.main {
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Pinned section */
+.pinned-section, .recent-section {
+  margin-bottom: 28px;
+}
+
+.pinned-section.empty, .recent-section.empty { display: none; }
+
+.section-label {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+}
+
+.section-label .ico {
+  width: 22px;
+  height: 22px;
+  background: var(--sun);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.section-label .ico.recent { background: var(--blue); color: var(--white); }
+
+.section-label .count {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  background: var(--ink);
+  color: var(--lime);
+  padding: 2px 6px;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+/* Group */
+.group {
+  margin-bottom: 32px;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed var(--ink);
+}
+
+.group-marker {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+
+.group[data-cat="gen-ai"] .group-marker { background: var(--c-gen); }
+.group[data-cat="agent"] .group-marker { background: var(--c-agent); }
+.group[data-cat="skill"] .group-marker { background: var(--c-skill); }
+.group[data-cat="create"] .group-marker { background: var(--c-create); }
+.group[data-cat="mobile"] .group-marker { background: var(--c-mobile); }
+.group[data-cat="pcdepot"] .group-marker { background: var(--c-pcd); }
+
+.group-title {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.group-jp {
+  font-size: 12px;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.group-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  background: var(--ink);
+  color: var(--lime);
+  padding: 2px 6px;
+  margin-left: auto;
+  font-weight: 700;
+}
+
+/* ====== GRID VIEW ====== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: var(--white);
+  border: 2.5px solid var(--ink);
+  padding: 14px;
+  position: relative;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.1s, box-shadow 0.1s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--ink);
+  min-height: 120px;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+
+.card-cat-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+}
+
+.card[data-cat="gen-ai"] .card-cat-bar { background: var(--c-gen); }
+.card[data-cat="agent"] .card-cat-bar { background: var(--c-agent); }
+.card[data-cat="skill"] .card-cat-bar { background: var(--c-skill); }
+.card[data-cat="create"] .card-cat-bar { background: var(--c-create); }
+.card[data-cat="mobile"] .card-cat-bar { background: var(--c-mobile); }
+.card[data-cat="pcdepot"] .card-cat-bar { background: var(--c-pcd); }
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+
+.card-cat {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  background: var(--gray-100);
+  padding: 2px 5px;
+  border: 1px solid var(--ink);
+}
+
+.card-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.card-btn {
+  width: 22px;
+  height: 22px;
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  cursor: pointer;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.1s;
+}
+
+.card-btn:hover { background: var(--lime); }
+
+.card-btn.pin-btn.active { background: var(--sun); }
+
+.card-btn.copy-btn.copied { background: var(--lime); }
+
+.card-title {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 22px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-500);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--gray-300);
+}
+
+.card-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.card-arrow {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 14px;
+}
+
+/* ====== LIST VIEW ====== */
+body.list-view .cards {
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+body.list-view .card {
+  flex-direction: row;
+  align-items: center;
+  min-height: 0;
+  padding: 10px 16px 10px 22px;
+  gap: 16px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+body.list-view .card:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+body.list-view .card-cat-bar {
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  right: auto;
+}
+
+body.list-view .card-head {
+  margin: 0;
+  order: 1;
+}
+
+body.list-view .card-title {
+  font-size: 16px;
+  margin: 0;
+  white-space: nowrap;
+  order: 2;
+  flex-shrink: 0;
+  min-width: 120px;
+}
+
+body.list-view .card-desc {
+  font-size: 12px;
+  order: 3;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+body.list-view .card-foot {
+  border: none;
+  padding: 0;
+  margin: 0;
+  order: 4;
+  gap: 8px;
+}
+
+body.list-view .card-cat {
+  order: 0;
+}
+
+/* ====== EMPTY STATE ====== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  display: none;
+}
+
+.empty-state.show { display: block; }
+
+.empty-icon {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 64px;
+  color: var(--gray-300);
+  margin-bottom: 12px;
+}
+
+.empty-title {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.empty-desc {
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+/* ====== TOAST ====== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--ink);
+  color: var(--lime);
+  padding: 10px 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2.5px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--pink);
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  letter-spacing: 0.05em;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ====== HELP MODAL ====== */
+.help-toggle {
+  background: var(--white);
+  border: 2.5px solid var(--ink);
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.help-toggle:hover { background: var(--sun); }
+
+.help-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  padding: 20px;
+}
+
+.help-modal.show { display: flex; }
+
+.help-box {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  padding: 24px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.help-box h3 {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.help-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--gray-300);
+  font-size: 13px;
+}
+
+.help-row:last-of-type { border-bottom: none; }
+
+.help-key {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  background: var(--ink);
+  color: var(--lime);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.help-close {
+  margin-top: 16px;
+  width: 100%;
+  background: var(--ink);
+  color: var(--white);
+  border: 2.5px solid var(--ink);
+  padding: 10px;
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.help-close:hover { background: var(--pink); }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 900px) {
+  .header { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+  .logo-text .small { display: none; }
+  .search-box { order: 3; width: 100%; max-width: 100%; flex-basis: 100%; }
+  .header-right { margin-left: auto; }
+  .tabs-bar { top: 110px; padding: 8px 16px; }
+  .main { padding: 16px; }
+  .cards { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+  .card-title { font-size: 18px; }
+
+  body.list-view .card { padding: 10px; flex-wrap: wrap; }
+  body.list-view .card-title { font-size: 14px; min-width: 0; }
+  body.list-view .card-desc { display: none; }
+}
+
+@media (max-width: 480px) {
+  .view-toggle { display: none; }
+  .badge-online { display: none; }
+  .tab { padding: 6px 10px; font-size: 11px; }
+  .tab .tab-key { display: none; }
+}
+
+::selection { background: var(--pink); color: var(--white); }
+</style>
 </head>
 <body>
 
-<div class="bg-pattern"></div>
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-mark">S</div>
+    <div class="logo-text">
+      SHIZUOKA
+      <span class="small">LEARNING PORTAL ★</span>
+    </div>
+  </div>
 
-<div class="wrapper">
+  <div class="search-box">
+    <span class="search-icon-left">SEARCH ▶</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="ChatGPT、MCP、docomo... 検索 / でフォーカス">
+    <button class="search-clear" id="searchClear" aria-label="クリア">✕</button>
+    <span class="search-hint">⌘ K</span>
+  </div>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-eyebrow">Shizuoka Branch · Learning Portal</div>
-    <h1 class="header-title">
-      <span class="title-mark">静岡Branch</span><br>学習ポータル
-    </h1>
-    <p class="header-sub">QuizMaster Collection ✦ 2025</p>
-    <svg class="squiggle" viewBox="0 0 130 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M3 9 C13 2,23 16,33 9 S53 2,63 9 S83 16,93 9 S113 2,127 9"
-            stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" opacity="0.12"/>
-      <path d="M3 9 C13 2,23 16,33 9 S53 2,63 9 S83 16,93 9 S113 2,127 9"
-            stroke="#ff6eb4" stroke-width="2.5" stroke-linecap="round"
-            stroke-dasharray="6 60" stroke-dashoffset="-8"/>
-      <path d="M3 9 C13 2,23 16,33 9 S53 2,63 9 S83 16,93 9 S113 2,127 9"
-            stroke="#ffe444" stroke-width="2.5" stroke-linecap="round"
-            stroke-dasharray="6 60" stroke-dashoffset="24"/>
-    </svg>
-  </header>
+  <div class="header-right">
+    <div class="view-toggle">
+      <button class="view-btn active" data-view="grid">▦ GRID</button>
+      <button class="view-btn" data-view="list">≡ LIST</button>
+    </div>
+    <button class="help-toggle" id="helpToggle" aria-label="ヘルプ">?</button>
+    <span class="badge-online">ONLINE</span>
+  </div>
+</header>
 
-  <!-- 生成AI -->
-  <section class="section">
-    <div class="section-header">
-      <span class="section-tag tag-ai">🤖 生成 AI</span>
-      <div class="section-rule"></div>
-      <span class="spin-star">✦</span>
-    </div>
-    <div class="card-grid">
-      <a href="https://gemini-quiz.vercel.app/" class="card" data-c="blue" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">G</div>
-        <span class="card-emoji">✦</span>
-        <span class="card-name">Gemini</span>
-        <span class="card-badge">Google</span>
-      </a>
-      <a href="https://chatgpt-quiz-ten.vercel.app/" class="card" data-c="green" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">C</div>
-        <span class="card-emoji">◈</span>
-        <span class="card-name">ChatGPT</span>
-        <span class="card-badge">OpenAI</span>
-      </a>
-      <a href="https://claude-quiz-zeta.vercel.app/" class="card" data-c="orange" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">A</div>
-        <span class="card-emoji">❋</span>
-        <span class="card-name">Claude</span>
-        <span class="card-badge">Anthropic</span>
-      </a>
-      <a href="https://grok-quiz.vercel.app/" class="card" data-c="purple" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">X</div>
-        <span class="card-emoji">⊕</span>
-        <span class="card-name">Grok</span>
-        <span class="card-badge">xAI</span>
-      </a>
-      <a href="https://notebooklm-gold.vercel.app/" class="card" data-c="yellow" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">N</div>
-        <span class="card-emoji">📓</span>
-        <span class="card-name">NotebookLM</span>
-        <span class="card-badge">Google</span>
-      </a>
-      <a href="https://genspark-quiz.vercel.app/" class="card" data-c="pink" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">S</div>
-        <span class="card-emoji">✧</span>
-        <span class="card-name">Genspark</span>
-        <span class="card-badge">Agent</span>
-      </a>
-      <a href="https://manus-quiz.vercel.app/" class="card" data-c="blue" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">M</div>
-        <span class="card-emoji">⟡</span>
-        <span class="card-name">Manus</span>
-        <span class="card-badge">Agent</span>
-      </a>
-      <a href="https://copilot-quiz.vercel.app/" class="card" data-c="blue" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">Co</div>
-        <span class="card-emoji">🪁</span>
-        <span class="card-name">Copilot</span>
-        <span class="card-badge">Microsoft</span>
-      </a>
-      <a href="https://canva-quiz.vercel.app/" class="card" data-c="purple" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">Ca</div>
-        <span class="card-emoji">🎨</span>
-        <span class="card-name">Canva</span>
-        <span class="card-badge">Design AI</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- PC -->
-  <section class="section">
-    <div class="section-header">
-      <span class="section-tag tag-pc">💻 PC</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="card-grid">
-      <a href="https://macbook-iota.vercel.app/" class="card" data-c="purple" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">M</div>
-        <span class="card-emoji">💻</span>
-        <span class="card-name">Macbook</span>
-        <span class="card-badge">Apple</span>
-      </a>
-      <a href="https://diypc-quiz.vercel.app/" class="card" data-c="green" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">D</div>
-        <span class="card-emoji">⚙️</span>
-        <span class="card-name">自作PC</span>
-        <span class="card-badge">Quiz</span>
-      </a>
-      <a href="https://pc-simulator.vercel.app/" class="card card-sub" data-c="green" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">S</div>
-        <span class="card-emoji">🖥️</span>
-        <span class="card-name">自作PC<br>シミュレーター</span>
-        <span class="card-badge">Simulator</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- 通信 -->
-  <section class="section">
-    <div class="section-header">
-      <span class="section-tag tag-tel">📡 通信</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="card-grid">
-      <a href="https://docomo-quiz.vercel.app/" class="card" data-c="pink" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">d</div>
-        <span class="card-emoji">◉</span>
-        <span class="card-name">docomo</span>
-        <span class="card-badge">NTT</span>
-      </a>
-      <a href="https://au-quiz.vercel.app/" class="card" data-c="orange" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">au</div>
-        <span class="card-emoji">◈</span>
-        <span class="card-name">au</span>
-        <span class="card-badge">KDDI</span>
-      </a>
-      <a href="https://softbank-quiz.vercel.app/" class="card" data-c="yellow" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">S</div>
-        <span class="card-emoji">◇</span>
-        <span class="card-name">SoftBank</span>
-        <span class="card-badge">SoftBank</span>
-      </a>
-      <a href="https://rakuten-quiz.vercel.app/" class="card" data-c="red" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">R</div>
-        <span class="card-emoji">🦅</span>
-        <span class="card-name">楽天</span>
-        <span class="card-badge">Rakuten</span>
-      </a>
-      <a href="https://price-seven-mu.vercel.app/" class="card card-sub" data-c="orange" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">¥</div>
-        <span class="card-emoji">💴</span>
-        <span class="card-name">携帯料金<br>シミュレーター</span>
-        <span class="card-badge">Simulator</span>
-      </a>
-      <a href="https://internet-weld.vercel.app/" class="card" data-c="blue" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">光</div>
-        <span class="card-emoji">🌐</span>
-        <span class="card-name">光回線</span>
-        <span class="card-badge">Internet</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- SNS -->
-  <section class="section">
-    <div class="section-header">
-      <span class="section-tag tag-sns">📣 SNS</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="card-grid">
-      <a href="https://instagram-quiz-nine.vercel.app/" class="card" data-c="pink" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">In</div>
-        <span class="card-emoji">📸</span>
-        <span class="card-name">Instagram</span>
-        <span class="card-badge">Meta</span>
-      </a>
-      <a href="https://x-quiz-flax.vercel.app/" class="card" data-c="yellow" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">X</div>
-        <span class="card-emoji">✕</span>
-        <span class="card-name">X</span>
-        <span class="card-badge">xAI</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- 行政 -->
-  <section class="section">
-    <div class="section-header">
-      <span class="section-tag tag-gov">🏛️ 行政</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="card-grid">
-      <a href="https://japan-sigma-nine.vercel.app/" class="card" data-c="red" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">日</div>
-        <span class="card-emoji">🇯🇵</span>
-        <span class="card-name">日本</span>
-        <span class="card-badge">Japan</span>
-      </a>
-      <a href="https://mishima.vercel.app/" class="card" data-c="blue" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">三</div>
-        <span class="card-emoji">🗻</span>
-        <span class="card-name">三島市</span>
-        <span class="card-badge">Mishima</span>
-      </a>
-      <a href="https://fuji-sigma.vercel.app/" class="card" data-c="orange" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">富</div>
-        <span class="card-emoji">🌋</span>
-        <span class="card-name">富士市</span>
-        <span class="card-badge">Fuji</span>
-      </a>
-      <a href="https://invoice-five-nu.vercel.app/" class="card" data-c="green" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">IN</div>
-        <span class="card-emoji">🧾</span>
-        <span class="card-name">インボイス<br>制度</span>
-        <span class="card-badge">Invoice</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- PCDEPOT -->
-  <section class="section">
-    <div class="section-header">
-      <span class="section-tag tag-depot">🏪 PCDEPOT</span>
-      <div class="section-rule"></div>
-    </div>
-    <div class="card-grid">
-      <a href="https://m410.vercel.app/" class="card" data-c="yellow" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">M</div>
-        <span class="card-emoji">🎭</span>
-        <span class="card-name">M410<br>ロープレ</span>
-        <span class="card-badge">Simulator</span>
-      </a>
-      <a href="https://wiki-one-ruddy.vercel.app/" class="card" data-c="purple" target="_blank" rel="noopener">
-        <div class="card-stripe"></div>
-        <div class="card-stamp">W</div>
-        <span class="card-emoji">📖</span>
-        <span class="card-name">社内用語<br>Wiki</span>
-        <span class="card-badge">Wiki</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-dots">
-      <div class="footer-dot" style="background:var(--marker-yellow)"></div>
-      <div class="footer-dot" style="background:var(--marker-pink)"></div>
-      <div class="footer-dot" style="background:var(--marker-green)"></div>
-      <div class="footer-dot" style="background:var(--marker-blue)"></div>
-      <div class="footer-dot" style="background:var(--marker-orange)"></div>
-      <div class="footer-dot" style="background:var(--marker-purple)"></div>
-      <div class="footer-dot" style="background:var(--marker-red)"></div>
-    </div>
-    <p class="footer-text">© 2025 静岡Branch · QuizMaster Learning Portal</p>
-  </footer>
-
+<!-- TABS -->
+<div class="tabs-bar">
+  <button class="tab active" data-filter="all"><span>ALL</span><span class="tab-key">0</span><span class="tab-count">16</span></button>
+  <button class="tab" data-filter="gen-ai"><span>GENERATIVE AI</span><span class="tab-key">1</span><span class="tab-count">4</span></button>
+  <button class="tab" data-filter="agent"><span>AI AGENT</span><span class="tab-key">2</span><span class="tab-count">3</span></button>
+  <button class="tab" data-filter="skill"><span>AI SKILL</span><span class="tab-key">3</span><span class="tab-count">4</span></button>
+  <button class="tab" data-filter="create"><span>CREATE</span><span class="tab-key">4</span><span class="tab-count">1</span></button>
+  <button class="tab" data-filter="mobile"><span>MOBILE</span><span class="tab-key">5</span><span class="tab-count">5</span></button>
+  <button class="tab" data-filter="pcdepot"><span>PC DEPOT</span><span class="tab-key">6</span><span class="tab-count">1</span></button>
+  <div class="tab-spacer"></div>
+  <div class="result-info"><span id="resultCount">16</span> / 16 ITEMS</div>
 </div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- Pinned -->
+  <section class="pinned-section empty" id="pinnedSection">
+    <div class="section-label">
+      <span class="ico">★</span>
+      PINNED
+      <span class="count" id="pinnedCount">0</span>
+    </div>
+    <div class="cards" id="pinnedCards"></div>
+  </section>
+
+  <!-- Recent -->
+  <section class="recent-section empty" id="recentSection">
+    <div class="section-label">
+      <span class="ico recent">↻</span>
+      RECENT
+      <span class="count" id="recentCount">0</span>
+    </div>
+    <div class="cards" id="recentCards"></div>
+  </section>
+
+  <!-- All groups -->
+  <div id="allGroups">
+    <!-- Group: Generative AI -->
+    <section class="group" data-cat="gen-ai">
+      <div class="group-header">
+        <div class="group-marker"></div>
+        <div class="group-title">GENERATIVE AI</div>
+        <div class="group-jp">生成AI</div>
+        <div class="group-num">04</div>
+      </div>
+      <div class="cards" data-grid></div>
+    </section>
+
+    <!-- Group: AI Agent -->
+    <section class="group" data-cat="agent">
+      <div class="group-header">
+        <div class="group-marker"></div>
+        <div class="group-title">AI AGENT</div>
+        <div class="group-jp">自律実行</div>
+        <div class="group-num">03</div>
+      </div>
+      <div class="cards" data-grid></div>
+    </section>
+
+    <!-- Group: AI Skill -->
+    <section class="group" data-cat="skill">
+      <div class="group-header">
+        <div class="group-marker"></div>
+        <div class="group-title">AI SKILL</div>
+        <div class="group-jp">活用技術</div>
+        <div class="group-num">04</div>
+      </div>
+      <div class="cards" data-grid></div>
+    </section>
+
+    <!-- Group: Create -->
+    <section class="group" data-cat="create">
+      <div class="group-header">
+        <div class="group-marker"></div>
+        <div class="group-title">CREATE</div>
+        <div class="group-jp">制作</div>
+        <div class="group-num">01</div>
+      </div>
+      <div class="cards" data-grid></div>
+    </section>
+
+    <!-- Group: Mobile -->
+    <section class="group" data-cat="mobile">
+      <div class="group-header">
+        <div class="group-marker"></div>
+        <div class="group-title">MOBILE</div>
+        <div class="group-jp">通信キャリア</div>
+        <div class="group-num">05</div>
+      </div>
+      <div class="cards" data-grid></div>
+    </section>
+
+    <!-- Group: PC DEPOT -->
+    <section class="group" data-cat="pcdepot">
+      <div class="group-header">
+        <div class="group-marker"></div>
+        <div class="group-title">PC DEPOT</div>
+        <div class="group-jp">社内</div>
+        <div class="group-num">01</div>
+      </div>
+      <div class="cards" data-grid></div>
+    </section>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" id="emptyState">
+    <div class="empty-icon">?!</div>
+    <div class="empty-title">該当なし</div>
+    <div class="empty-desc">検索条件を変えてみてください</div>
+  </div>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">COPIED!</div>
+
+<!-- HELP MODAL -->
+<div class="help-modal" id="helpModal">
+  <div class="help-box">
+    <h3>⌨ ショートカット</h3>
+    <div class="help-row"><span>検索フォーカス</span><span class="help-key">⌘K / /</span></div>
+    <div class="help-row"><span>検索クリア</span><span class="help-key">ESC</span></div>
+    <div class="help-row"><span>カテゴリ切替</span><span class="help-key">0〜6</span></div>
+    <div class="help-row"><span>カード移動</span><span class="help-key">↑↓←→</span></div>
+    <div class="help-row"><span>選択を開く</span><span class="help-key">ENTER</span></div>
+    <div class="help-row"><span>表示切替</span><span class="help-key">V</span></div>
+    <div class="help-row"><span>ヘルプ</span><span class="help-key">?</span></div>
+    <button class="help-close" id="helpClose">CLOSE</button>
+  </div>
+</div>
+
+<script>
+// ====== DATA ======
+const DATA = [
+  // Generative AI
+  { id: 'chatgpt', cat: 'gen-ai', title: 'ChatGPT', desc: 'OpenAIの汎用対話AI。情報整理と文章生成の基礎。', tag: 'OPENAI', url: 'https://chatgpt-inky-nine.vercel.app/', keywords: 'chatgpt openai gpt' },
+  { id: 'claude', cat: 'gen-ai', title: 'Claude', desc: '長文理解と思考整理に強み。当ポータル推奨。', tag: 'ANTHROPIC', url: 'https://claude-eight-nu.vercel.app/', keywords: 'claude anthropic' },
+  { id: 'gemini', cat: 'gen-ai', title: 'Gemini', desc: 'Google製。検索とWorkspace連携が強力。', tag: 'GOOGLE', url: 'https://gemini-ten-vert.vercel.app/', keywords: 'gemini google' },
+  { id: 'notebooklm', cat: 'gen-ai', title: 'NotebookLM', desc: '資料に基づく要約と質問応答。ソース連動型。', tag: 'GOOGLE · RAG', url: 'https://notebooklm-sandy.vercel.app/', keywords: 'notebooklm google rag' },
+
+  // AI Agent
+  { id: 'codex', cat: 'agent', title: 'Codex', desc: 'OpenAIのコーディング特化エージェント。', tag: 'OPENAI', url: 'https://codex-seven-zeta.vercel.app/', keywords: 'codex openai coding' },
+  { id: 'cowork', cat: 'agent', title: 'Claude Cowork', desc: '非エンジニア向けデスクトップ自動化。', tag: 'ANTHROPIC', url: 'https://claude-cowork-pi.vercel.app/', keywords: 'claude cowork anthropic desktop' },
+  { id: 'claude-code', cat: 'agent', title: 'Claude Code', desc: 'ターミナル直結。バイブコーディングの主役。', tag: 'CLI', url: 'https://claude-code-seven-rust.vercel.app/', keywords: 'claude code cli terminal vibe' },
+
+  // AI Skill
+  { id: 'prompt', cat: 'skill', title: 'Prompt', desc: 'プロンプト設計の基本と応用パターン。', tag: 'FOUNDATION', url: 'https://prompt-flame-omega.vercel.app/', keywords: 'prompt プロンプト' },
+  { id: 'mcp', cat: 'skill', title: 'MCP', desc: 'Model Context Protocol。AIに能力を拡張。', tag: 'PROTOCOL', url: 'https://ai-expansion.vercel.app/', keywords: 'mcp protocol model context' },
+  { id: 'agent-md', cat: 'skill', title: 'Agent.md', desc: 'エージェント向け指示書の書き方。', tag: 'STANDARD', url: 'https://md-orpin-xi.vercel.app/', keywords: 'agent md markdown' },
+  { id: 'skills', cat: 'skill', title: 'Skills', desc: 'Claudeの能力をパッケージ化する仕組み。', tag: 'ANTHROPIC', url: 'https://skills-tau-ten.vercel.app/', keywords: 'skills claude' },
+
+  // Create
+  { id: 'web', cat: 'create', title: 'WEB', desc: 'バイブコーディングでWebサイトを作る。HTML/JS/CSSの単一ファイル制作術。', tag: 'VIBE CODING', url: 'https://web-create-768qk4e5l-slmc-shizuoka.vercel.app/', keywords: 'web html javascript css vibe coding' },
+
+  // Mobile
+  { id: 'docomo', cat: 'mobile', title: 'docomo', desc: 'NTTドコモのプラン・サービス資料。', tag: 'CARRIER', url: 'https://docomo-yhk8.vercel.app/', keywords: 'docomo ドコモ ntt' },
+  { id: 'au', cat: 'mobile', title: 'au', desc: 'KDDIのプラン・サービス資料。', tag: 'CARRIER', url: 'https://au-kohl.vercel.app/', keywords: 'au kddi エーユー' },
+  { id: 'softbank', cat: 'mobile', title: 'Softbank', desc: 'ソフトバンクのプラン・サービス資料。', tag: 'CARRIER', url: 'https://softbank-one.vercel.app/', keywords: 'softbank ソフトバンク' },
+  { id: 'rakuten', cat: 'mobile', title: 'Rakuten', desc: '楽天モバイルのプラン・サービス資料。', tag: 'CARRIER', url: 'https://rakuten-three.vercel.app/', keywords: 'rakuten 楽天' },
+  { id: 'simulator', cat: 'mobile', title: 'Simulator', desc: '料金シミュレーター。比較・試算ツール。', tag: 'TOOL', url: 'https://mobile-simulator-olive.vercel.app/', keywords: 'simulator シミュレーター 料金' },
+
+  // PC DEPOT
+  { id: 'wiki', cat: 'pcdepot', title: 'Wiki', desc: 'PC DEPOT社内向けナレッジベース。業務手順・FAQ・規程の参照ポイント。', tag: 'INTERNAL', url: 'https://pcdepot-wiki.vercel.app/', keywords: 'wiki pcdepot ピーシーデポ ナレッジ' },
+];
+
+const CAT_LABEL = {
+  'gen-ai': 'GENERATIVE AI',
+  'agent': 'AI AGENT',
+  'skill': 'AI SKILL',
+  'create': 'CREATE',
+  'mobile': 'MOBILE',
+  'pcdepot': 'PC DEPOT'
+};
+
+// ====== STATE ======
+let state = {
+  filter: 'all',
+  query: '',
+  view: localStorage.getItem('slp_view') || 'grid',
+  pinned: JSON.parse(localStorage.getItem('slp_pinned') || '[]'),
+  recent: JSON.parse(localStorage.getItem('slp_recent') || '[]'),
+  focusIndex: -1
+};
+
+// ====== RENDER CARD ======
+function makeCard(item, opts = {}) {
+  const isPinned = state.pinned.includes(item.id);
+  const card = document.createElement('a');
+  card.href = item.url;
+  card.target = '_blank';
+  card.rel = 'noopener';
+  card.className = 'card';
+  card.dataset.id = item.id;
+  card.dataset.cat = item.cat;
+  card.dataset.search = (item.title + ' ' + item.desc + ' ' + item.keywords + ' ' + item.tag).toLowerCase();
+  card.tabIndex = 0;
+
+  card.innerHTML = `
+    <div class="card-cat-bar"></div>
+    <div class="card-head">
+      <span class="card-cat">${CAT_LABEL[item.cat]}</span>
+      <div class="card-actions">
+        <button class="card-btn pin-btn ${isPinned ? 'active' : ''}" data-act="pin" data-id="${item.id}" title="ピン留め" aria-label="ピン留め">★</button>
+        <button class="card-btn copy-btn" data-act="copy" data-url="${item.url}" title="URLコピー" aria-label="URLコピー">⧉</button>
+      </div>
+    </div>
+    <div class="card-title">${item.title}</div>
+    <div class="card-desc">${item.desc}</div>
+    <div class="card-foot">
+      <span class="card-tag">${item.tag}</span>
+      <span class="card-arrow">↗</span>
+    </div>
+  `;
+
+  // Card click → record recent
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('.card-btn')) {
+      e.preventDefault();
+      return;
+    }
+    recordRecent(item.id);
+  });
+
+  return card;
+}
+
+// ====== RENDER ======
+function renderAll() {
+  // Render groups
+  document.querySelectorAll('.group').forEach(group => {
+    const cat = group.dataset.cat;
+    const container = group.querySelector('[data-grid]');
+    container.innerHTML = '';
+    DATA.filter(d => d.cat === cat).forEach(item => {
+      container.appendChild(makeCard(item));
+    });
+  });
+
+  renderPinned();
+  renderRecent();
+  applyFilter();
+}
+
+function renderPinned() {
+  const section = document.getElementById('pinnedSection');
+  const container = document.getElementById('pinnedCards');
+  const count = document.getElementById('pinnedCount');
+
+  container.innerHTML = '';
+  const pinnedItems = state.pinned.map(id => DATA.find(d => d.id === id)).filter(Boolean);
+
+  if (pinnedItems.length === 0) {
+    section.classList.add('empty');
+    return;
+  }
+
+  section.classList.remove('empty');
+  count.textContent = pinnedItems.length;
+  pinnedItems.forEach(item => {
+    container.appendChild(makeCard(item));
+  });
+}
+
+function renderRecent() {
+  const section = document.getElementById('recentSection');
+  const container = document.getElementById('recentCards');
+  const count = document.getElementById('recentCount');
+
+  container.innerHTML = '';
+  // Exclude pinned from recent
+  const recentItems = state.recent
+    .filter(id => !state.pinned.includes(id))
+    .slice(0, 4)
+    .map(id => DATA.find(d => d.id === id))
+    .filter(Boolean);
+
+  if (recentItems.length === 0) {
+    section.classList.add('empty');
+    return;
+  }
+
+  section.classList.remove('empty');
+  count.textContent = recentItems.length;
+  recentItems.forEach(item => {
+    container.appendChild(makeCard(item));
+  });
+}
+
+// ====== FILTER ======
+function applyFilter() {
+  const q = state.query.toLowerCase().trim();
+  let visibleCount = 0;
+
+  document.querySelectorAll('#allGroups .card').forEach(card => {
+    const catMatch = state.filter === 'all' || card.dataset.cat === state.filter;
+    const queryMatch = !q || card.dataset.search.includes(q);
+    const show = catMatch && queryMatch;
+    card.style.display = show ? '' : 'none';
+    if (show) visibleCount++;
+  });
+
+  // Hide groups whose cards are all hidden
+  document.querySelectorAll('#allGroups .group').forEach(group => {
+    const cards = group.querySelectorAll('.card');
+    const visible = Array.from(cards).some(c => c.style.display !== 'none');
+    group.style.display = visible ? '' : 'none';
+  });
+
+  // Hide pinned/recent when filtering or searching
+  const hideAside = state.filter !== 'all' || q;
+  document.getElementById('pinnedSection').style.display = hideAside ? 'none' : '';
+  document.getElementById('recentSection').style.display = hideAside ? 'none' : '';
+
+  // Result count
+  document.getElementById('resultCount').textContent = visibleCount;
+
+  // Empty state
+  const empty = document.getElementById('emptyState');
+  if (visibleCount === 0) empty.classList.add('show');
+  else empty.classList.remove('show');
+
+  // Reset focus
+  state.focusIndex = -1;
+}
+
+// ====== ACTIONS ======
+function togglePin(id) {
+  const idx = state.pinned.indexOf(id);
+  if (idx >= 0) {
+    state.pinned.splice(idx, 1);
+    toast('PIN REMOVED');
+  } else {
+    state.pinned.push(id);
+    toast('PINNED ★');
+  }
+  localStorage.setItem('slp_pinned', JSON.stringify(state.pinned));
+  renderPinned();
+  // Update pin button visual on all cards with this id
+  document.querySelectorAll(`.pin-btn[data-id="${id}"]`).forEach(b => {
+    b.classList.toggle('active', state.pinned.includes(id));
+  });
+}
+
+function copyUrl(url, btn) {
+  navigator.clipboard.writeText(url).then(() => {
+    toast('URL COPIED ✓');
+    btn.classList.add('copied');
+    setTimeout(() => btn.classList.remove('copied'), 1200);
+  }).catch(() => {
+    toast('COPY FAILED');
+  });
+}
+
+function recordRecent(id) {
+  state.recent = [id, ...state.recent.filter(x => x !== id)].slice(0, 8);
+  localStorage.setItem('slp_recent', JSON.stringify(state.recent));
+  // Don't re-render immediately—the link is opening, but update for next visit
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => t.classList.remove('show'), 1600);
+}
+
+// ====== SEARCH ======
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+
+searchInput.addEventListener('input', (e) => {
+  state.query = e.target.value;
+  searchClear.classList.toggle('show', !!state.query);
+  applyFilter();
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  state.query = '';
+  searchClear.classList.remove('show');
+  applyFilter();
+  searchInput.focus();
+});
+
+// ====== TABS ======
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    state.filter = tab.dataset.filter;
+    applyFilter();
+  });
+});
+
+// ====== VIEW TOGGLE ======
+document.querySelectorAll('.view-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.view = btn.dataset.view;
+    document.body.classList.toggle('list-view', state.view === 'list');
+    localStorage.setItem('slp_view', state.view);
+  });
+});
+
+// Apply saved view
+if (state.view === 'list') {
+  document.body.classList.add('list-view');
+  document.querySelectorAll('.view-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === 'list');
+  });
+}
+
+// ====== CARD ACTIONS DELEGATE ======
+document.body.addEventListener('click', (e) => {
+  const btn = e.target.closest('.card-btn');
+  if (!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (btn.dataset.act === 'pin') {
+    togglePin(btn.dataset.id);
+  } else if (btn.dataset.act === 'copy') {
+    copyUrl(btn.dataset.url, btn);
+  }
+});
+
+// ====== KEYBOARD ======
+document.addEventListener('keydown', (e) => {
+  const isInput = e.target.tagName === 'INPUT';
+
+  // ⌘K / Ctrl+K
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    searchInput.focus();
+    searchInput.select();
+    return;
+  }
+
+  // ESC: clear search or unfocus
+  if (e.key === 'Escape') {
+    if (isInput) {
+      searchInput.value = '';
+      state.query = '';
+      searchClear.classList.remove('show');
+      applyFilter();
+      searchInput.blur();
+    }
+    document.getElementById('helpModal').classList.remove('show');
+    return;
+  }
+
+  if (isInput) return;
+
+  // / to focus search
+  if (e.key === '/') {
+    e.preventDefault();
+    searchInput.focus();
+    return;
+  }
+
+  // ? for help
+  if (e.key === '?') {
+    e.preventDefault();
+    document.getElementById('helpModal').classList.add('show');
+    return;
+  }
+
+  // Number keys 0-6 for categories
+  if (/^[0-6]$/.test(e.key)) {
+    const tabs = document.querySelectorAll('.tab');
+    const idx = parseInt(e.key);
+    if (tabs[idx]) tabs[idx].click();
+    return;
+  }
+
+  // V for view toggle
+  if (e.key.toLowerCase() === 'v') {
+    const otherView = state.view === 'grid' ? 'list' : 'grid';
+    document.querySelector(`.view-btn[data-view="${otherView}"]`).click();
+    return;
+  }
+
+  // Arrow keys for card navigation
+  if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
+    const visibleCards = Array.from(document.querySelectorAll('.card')).filter(c => c.offsetParent !== null);
+    if (!visibleCards.length) return;
+
+    if (e.key === 'Enter' && state.focusIndex >= 0) {
+      visibleCards[state.focusIndex]?.click();
+      return;
+    }
+
+    e.preventDefault();
+    if (state.focusIndex < 0) {
+      state.focusIndex = 0;
+    } else {
+      // Determine columns (rough estimate by getBoundingClientRect)
+      const firstRect = visibleCards[0].getBoundingClientRect();
+      const cols = Math.max(1, Math.floor(document.querySelector('.main').clientWidth / firstRect.width));
+
+      if (e.key === 'ArrowRight') state.focusIndex = Math.min(state.focusIndex + 1, visibleCards.length - 1);
+      else if (e.key === 'ArrowLeft') state.focusIndex = Math.max(state.focusIndex - 1, 0);
+      else if (e.key === 'ArrowDown') state.focusIndex = Math.min(state.focusIndex + cols, visibleCards.length - 1);
+      else if (e.key === 'ArrowUp') state.focusIndex = Math.max(state.focusIndex - cols, 0);
+    }
+    visibleCards[state.focusIndex]?.focus();
+  }
+});
+
+// ====== HELP MODAL ======
+document.getElementById('helpToggle').addEventListener('click', () => {
+  document.getElementById('helpModal').classList.add('show');
+});
+document.getElementById('helpClose').addEventListener('click', () => {
+  document.getElementById('helpModal').classList.remove('show');
+});
+document.getElementById('helpModal').addEventListener('click', (e) => {
+  if (e.target.id === 'helpModal') {
+    document.getElementById('helpModal').classList.remove('show');
+  }
+});
+
+// ====== INIT ======
+renderAll();
+</script>
+
 </body>
 </html>

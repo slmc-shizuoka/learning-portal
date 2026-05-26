@@ -241,47 +241,6 @@ body::before {
   margin-left: 40px;
 }
 
-.hero-stickers {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.sticker {
-  position: absolute;
-  background: var(--white);
-  border: 3px solid var(--ink);
-  padding: 10px 18px;
-  font-family: 'Bowlby One', sans-serif;
-  font-size: 14px;
-  box-shadow: 4px 4px 0 var(--ink);
-}
-
-.sticker.s1 {
-  top: 10%;
-  right: 8%;
-  background: var(--lime);
-  transform: rotate(8deg);
-}
-
-.sticker.s2 {
-  top: 50%;
-  right: 15%;
-  background: var(--electric-blue);
-  color: var(--white);
-  transform: rotate(-6deg);
-  font-size: 12px;
-}
-
-.sticker.s3 {
-  bottom: 5%;
-  right: 25%;
-  background: var(--sun);
-  transform: rotate(4deg);
-  font-size: 16px;
-  border-radius: 99px;
-}
-
 .hero-bottom {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -683,35 +642,6 @@ body::before {
   color: var(--sun);
 }
 
-/* ====== FLOATING STICKERS ====== */
-.float-sticker {
-  position: absolute;
-  font-family: 'Bowlby One', sans-serif;
-  background: var(--white);
-  border: 3px solid var(--ink);
-  padding: 8px 14px;
-  font-size: 14px;
-  box-shadow: 4px 4px 0 var(--ink);
-  pointer-events: none;
-  z-index: 5;
-}
-
-.fs-1 {
-  top: 40px;
-  right: -10px;
-  background: var(--hot-pink);
-  color: var(--white);
-  transform: rotate(8deg);
-}
-
-.fs-2 {
-  bottom: 60px;
-  left: -20px;
-  background: var(--lime);
-  transform: rotate(-6deg);
-  font-size: 12px;
-}
-
 /* ====== FOOTER ====== */
 .footer {
   margin-top: 80px;
@@ -819,14 +749,6 @@ body::before {
   animation: wiggle 0.4s ease;
 }
 
-@keyframes spin-slow {
-  to { transform: rotate(360deg); }
-}
-
-.sticker.s3 {
-  animation: spin-slow 8s linear infinite;
-}
-
 /* ====== RESPONSIVE ====== */
 @media (max-width: 1024px) {
   .cards, .cards.three, .cards.four, .cards.five {
@@ -863,8 +785,6 @@ body::before {
 
   .footer-brand { font-size: 36px; }
   .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
-
-  .sticker { display: none; }
 }
 
 /* Selection */
@@ -883,12 +803,10 @@ body::before {
     <span>HARAJUKU EDITION VOL.01</span><span class="dot">●</span>
     <span>NEW DROP 2025</span><span class="dot">●</span>
     <span>AI × VIBE × LEARNING</span><span class="dot">●</span>
-    <span>SLMC / FUJI BASE</span><span class="dot">●</span>
     <span>★ SHIZUOKA LEARNING PORTAL</span><span class="dot">●</span>
     <span>HARAJUKU EDITION VOL.01</span><span class="dot">●</span>
     <span>NEW DROP 2025</span><span class="dot">●</span>
     <span>AI × VIBE × LEARNING</span><span class="dot">●</span>
-    <span>SLMC / FUJI BASE</span><span class="dot">●</span>
   </div>
 </div>
 
@@ -910,12 +828,6 @@ body::before {
 <!-- Hero -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-stickers">
-      <div class="sticker s1">NEW!! ★</div>
-      <div class="sticker s2">AI ACTIVATED</div>
-      <div class="sticker s3">SUPER<br>POP</div>
-    </div>
-
     <div class="hero-label">▶ ISSUE 01 / 2025</div>
 
     <h1 class="hero-title">
@@ -1133,7 +1045,7 @@ body::before {
           <span class="card-tag">ANTHROPIC</span>
         </div>
       </a>
-      <a href="https://vercel.com/slmc-shizuoka/ai-skill-test" target="_blank" class="card v-test" data-name="test skill">
+      <a href="https://ai-skill-test-theta.vercel.app/" target="_blank" class="card v-test" data-name="test skill">
         <div class="card-top">
           <span class="card-no">05/05</span>
           <span class="card-arrow">↗</span>
@@ -1289,7 +1201,7 @@ body::before {
           <span class="pink">LEARNING</span><br>
           <span class="sun">PORTAL ★</span>
         </div>
-        <p class="footer-tag">PC DEPOT 静岡支社 SL Fuji BASE 発信。<br>現場で使えるAI活用のための学習ハブ。</p>
+        <p class="footer-tag">PC DEPOT 静岡支社 発信。<br>現場で使えるAI活用のための学習ハブ。</p>
       </div>
       <div class="footer-col">
         <h4>SECTIONS</h4>
@@ -1307,7 +1219,6 @@ body::before {
         <ul>
           <li>SLMC Management</li>
           <li>Shizuoka Branch</li>
-          <li>Fuji BASE</li>
           <li>Western Japan</li>
         </ul>
       </div>

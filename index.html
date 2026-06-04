@@ -2,25 +2,11 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>SHIZUOKA PORTAL ★ DAILY OPS HUB</title>
-<meta name="description" content="静岡支社の業務ハブ。マスター、勤怠、FAS、カレンダー、ショートカットを一画面に集約。">
-
-<!-- PWA -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ff2d87">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Shizuoka">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-
-<!-- Fonts -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHIZUOKA LEARNING PORTAL ★ HARAJUKU EDITION</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One&family=Noto+Sans+JP:wght@400;700;900&family=Reggae+One&family=RocknRoll+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bowlby+One&family=DotGothic16&family=Noto+Sans+JP:wght@400;700;900&family=Rampart+One&family=Reggae+One&family=RocknRoll+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --hot-pink: #ff2d87;
@@ -34,8 +20,15 @@
   --white: #ffffff;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Noto Sans JP', sans-serif;
@@ -44,9 +37,9 @@ body {
   font-weight: 700;
   overflow-x: hidden;
   position: relative;
-  -webkit-tap-highlight-color: transparent;
 }
 
+/* ====== Halftone background dots ====== */
 body::before {
   content: '';
   position: fixed;
@@ -57,7 +50,7 @@ body::before {
   background-size: 14px 14px;
 }
 
-/* Ticker */
+/* ====== TOP TICKER ====== */
 .ticker {
   background: var(--ink);
   color: var(--lime);
@@ -68,6 +61,7 @@ body::before {
   z-index: 10;
   border-bottom: 4px solid var(--ink);
 }
+
 .ticker-track {
   display: inline-block;
   animation: marquee 30s linear infinite;
@@ -76,14 +70,21 @@ body::before {
   font-weight: 700;
   letter-spacing: 0.15em;
 }
-.ticker-track span { margin: 0 32px; }
-.ticker-track span.dot { color: var(--hot-pink); }
+
+.ticker-track span {
+  margin: 0 32px;
+}
+
+.ticker-track span.dot {
+  color: var(--hot-pink);
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 
-/* Header */
+/* ====== HEADER ====== */
 .header {
   background: var(--white);
   border-bottom: 4px solid var(--ink);
@@ -94,7 +95,9 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 50;
+  position: relative;
 }
+
 .header::after {
   content: '';
   position: absolute;
@@ -113,58 +116,35 @@ body::before {
   );
 }
 
-.logo { display: flex; align-items: center; gap: 12px; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .logo-mark {
-  width: 48px;
-  height: 48px;
-  background: var(--sun);
+  width: 44px;
+  height: 44px;
+  background: var(--hot-pink);
   border: 3px solid var(--ink);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  box-shadow: 4px 4px 0 var(--ink);
-  flex-shrink: 0;
-}
-.logo-mark::before {
-  /* ピンクの内側プレート */
-  content: '';
-  position: absolute;
-  inset: 6px;
-  background: var(--hot-pink);
-  border: 2px solid var(--ink);
-}
-.logo-mark::after {
-  /* 右上のハザード斜線アクセント */
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 12px;
-  height: 12px;
-  background: repeating-linear-gradient(
-    -45deg,
-    var(--ink) 0,
-    var(--ink) 2px,
-    transparent 2px,
-    transparent 4px
-  );
-}
-.logo-mark span {
-  position: relative;
-  z-index: 1;
   font-family: 'Bowlby One', sans-serif;
   color: var(--white);
   font-size: 22px;
-  text-shadow: 1.5px 1.5px 0 var(--ink);
-  line-height: 1;
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: rotate(-5deg);
 }
+
 .logo-text {
   font-family: 'Bowlby One', sans-serif;
   font-size: 22px;
   letter-spacing: -0.01em;
   line-height: 0.95;
 }
+
 .logo-text .small {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
@@ -176,10 +156,13 @@ body::before {
 }
 
 .header-right {
-  display: flex; align-items: center; gap: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   font-family: 'Space Mono', monospace;
   font-size: 12px;
 }
+
 .badge-online {
   background: var(--lime);
   border: 2px solid var(--ink);
@@ -187,17 +170,31 @@ body::before {
   border-radius: 99px;
   font-weight: 700;
 }
+
 .badge-online::before {
   content: '●';
   color: var(--ink);
   margin-right: 4px;
   animation: blink 1s infinite;
 }
-@keyframes blink { 50% { opacity: 0.3; } }
 
-/* Hero */
-.hero { padding: 60px 32px 40px; position: relative; z-index: 2; overflow: hidden; }
-.hero-inner { max-width: 1400px; margin: 0 auto; position: relative; }
+@keyframes blink {
+  50% { opacity: 0.3; }
+}
+
+/* ====== HERO ====== */
+.hero {
+  padding: 60px 32px 40px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
 
 .hero-label {
   display: inline-block;
@@ -221,17 +218,26 @@ body::before {
   text-transform: uppercase;
   position: relative;
 }
-.hero-title .row1 { display: block; color: var(--ink); }
+
+.hero-title .row1 {
+  display: block;
+  color: var(--ink);
+  -webkit-text-stroke: 0;
+}
+
 .hero-title .row2 {
   display: block;
   color: transparent;
   -webkit-text-stroke: 3px var(--ink);
   margin-left: 80px;
 }
+
 .hero-title .row3 {
   display: block;
   color: var(--hot-pink);
-  text-shadow: 5px 5px 0 var(--ink), 10px 10px 0 var(--sun);
+  text-shadow:
+    5px 5px 0 var(--ink),
+    10px 10px 0 var(--sun);
   margin-left: 40px;
 }
 
@@ -255,6 +261,7 @@ body::before {
   position: relative;
   max-width: 600px;
 }
+
 .hero-desc::before {
   content: '';
   position: absolute;
@@ -266,6 +273,7 @@ body::before {
   border-left: 3px solid var(--ink);
   border-bottom: 3px solid var(--ink);
 }
+
 .hero-desc mark {
   background: var(--sun);
   padding: 2px 6px;
@@ -277,23 +285,33 @@ body::before {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
+
 .stat-box {
   background: var(--ink);
   color: var(--white);
   border: 3px solid var(--ink);
   padding: 18px 14px;
   text-align: center;
+  position: relative;
   box-shadow: 5px 5px 0 var(--hot-pink);
 }
+
 .stat-box:nth-child(2) {
   background: var(--hot-pink);
   box-shadow: 5px 5px 0 var(--ink);
 }
+
 .stat-box:nth-child(3) {
   background: var(--electric-blue);
   box-shadow: 5px 5px 0 var(--ink);
 }
-.stat-num { font-family: 'Anton', sans-serif; font-size: 48px; line-height: 1; }
+
+.stat-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 48px;
+  line-height: 1;
+}
+
 .stat-label {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
@@ -301,8 +319,13 @@ body::before {
   margin-top: 6px;
 }
 
-/* Search */
-.search-section { padding: 0 32px 40px; position: relative; z-index: 2; }
+/* ====== SEARCH ====== */
+.search-section {
+  padding: 0 32px 40px;
+  position: relative;
+  z-index: 2;
+}
+
 .search-wrap {
   max-width: 1400px;
   margin: 0 auto;
@@ -315,6 +338,7 @@ body::before {
   box-shadow: 8px 8px 0 var(--ink);
   position: relative;
 }
+
 .search-wrap::before {
   content: '★';
   position: absolute;
@@ -332,7 +356,12 @@ body::before {
   font-size: 24px;
   transform: rotate(-15deg);
 }
-.search-icon { font-family: 'Bowlby One', sans-serif; font-size: 18px; }
+
+.search-icon {
+  font-family: 'Bowlby One', sans-serif;
+  font-size: 18px;
+}
+
 .search-input {
   flex: 1;
   border: none;
@@ -343,7 +372,11 @@ body::before {
   color: var(--ink);
   outline: none;
 }
-.search-input::placeholder { color: rgba(10,10,10,0.5); }
+
+.search-input::placeholder {
+  color: rgba(10,10,10,0.5);
+}
+
 .search-hint {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
@@ -353,7 +386,7 @@ body::before {
   border-radius: 4px;
 }
 
-/* Container & Section */
+/* ====== CONTAINER ====== */
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -361,7 +394,13 @@ body::before {
   position: relative;
   z-index: 2;
 }
-.section { padding: 56px 0; }
+
+/* ====== SECTION ====== */
+.section {
+  padding: 56px 0;
+  position: relative;
+}
+
 .section-header {
   display: flex;
   align-items: center;
@@ -369,6 +408,7 @@ body::before {
   margin-bottom: 32px;
   flex-wrap: wrap;
 }
+
 .section-num {
   font-family: 'Bowlby One', sans-serif;
   font-size: 56px;
@@ -376,6 +416,7 @@ body::before {
   -webkit-text-stroke: 3px var(--ink);
   line-height: 0.9;
 }
+
 .section-title {
   font-family: 'Anton', sans-serif;
   font-size: clamp(36px, 5vw, 60px);
@@ -383,7 +424,12 @@ body::before {
   letter-spacing: -0.01em;
   line-height: 0.95;
 }
-.section-title .accent { color: var(--hot-pink); font-style: italic; }
+
+.section-title .accent {
+  color: var(--hot-pink);
+  font-style: italic;
+}
+
 .section-jp {
   font-family: 'Reggae One', sans-serif;
   font-size: 22px;
@@ -393,6 +439,7 @@ body::before {
   box-shadow: 4px 4px 0 var(--ink);
   transform: rotate(-2deg);
 }
+
 .section-count {
   margin-left: auto;
   font-family: 'Space Mono', monospace;
@@ -403,13 +450,16 @@ body::before {
   letter-spacing: 0.1em;
 }
 
-/* Cards */
+/* ====== CARDS ====== */
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
-.cards.two { grid-template-columns: repeat(2, 1fr); }
+
+.cards.three { grid-template-columns: repeat(3, 1fr); }
+.cards.four { grid-template-columns: repeat(4, 1fr); }
+.cards.five { grid-template-columns: repeat(5, 1fr); }
 .cards.one { grid-template-columns: 1fr; }
 
 .card {
@@ -427,10 +477,12 @@ body::before {
   justify-content: space-between;
   overflow: hidden;
 }
+
 .card:hover {
   transform: translate(-3px, -3px);
   box-shadow: 9px 9px 0 var(--ink);
 }
+
 .card:active {
   transform: translate(3px, 3px);
   box-shadow: 3px 3px 0 var(--ink);
@@ -441,6 +493,7 @@ body::before {
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .card-no {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
@@ -450,6 +503,7 @@ body::before {
   padding: 3px 8px;
   letter-spacing: 0.1em;
 }
+
 .card-arrow {
   width: 32px;
   height: 32px;
@@ -463,18 +517,21 @@ body::before {
   font-size: 14px;
   transition: transform 0.2s ease;
 }
+
 .card:hover .card-arrow {
   transform: rotate(45deg);
   background: var(--hot-pink);
   color: var(--white);
 }
+
 .card-title {
   font-family: 'Bowlby One', sans-serif;
-  font-size: 28px;
+  font-size: 32px;
   line-height: 1;
   margin: 16px 0 10px;
   letter-spacing: -0.02em;
 }
+
 .card-desc {
   font-family: 'RocknRoll One', sans-serif;
   font-size: 13px;
@@ -482,6 +539,7 @@ body::before {
   line-height: 1.5;
   color: var(--ink);
 }
+
 .card-tag {
   display: inline-block;
   font-family: 'Space Mono', monospace;
@@ -494,7 +552,7 @@ body::before {
   letter-spacing: 0.05em;
 }
 
-/* Color variants */
+/* Color variants — each card gets a vibe */
 .card.v-pink { background: var(--hot-pink); color: var(--white); }
 .card.v-pink .card-tag { background: var(--white); color: var(--ink); }
 .card.v-pink .card-arrow { background: var(--sun); }
@@ -522,6 +580,26 @@ body::before {
 .card.v-ink .card-arrow { background: var(--hot-pink); color: var(--white); }
 .card.v-ink .card-no { background: var(--lime); color: var(--ink); }
 
+/* TEST card — 検証用とわかる控えめなアクセント */
+.card.v-test {
+  background: var(--cream);
+  color: var(--ink);
+  border: 3px dashed var(--ink);
+}
+.card.v-test .card-no {
+  background: var(--ink);
+  color: var(--sun);
+}
+.card.v-test .card-arrow {
+  background: var(--ink);
+  color: var(--sun);
+}
+.card.v-test .card-tag {
+  background: var(--sun);
+  color: var(--ink);
+}
+
+/* Decorative corner */
 .card::after {
   content: '';
   position: absolute;
@@ -534,73 +612,37 @@ body::before {
   pointer-events: none;
 }
 
-/* Single-item card for Tool section */
-.card.solo {
-  min-height: 180px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.card.solo .card-content { flex: 1; }
-.card.solo .card-title { font-size: 48px; margin: 12px 0 8px; }
-.card.solo .card-arrow-wrap {
-  width: 64px;
-  height: 64px;
-  background: var(--hot-pink);
-  border: 3px solid var(--ink);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Bowlby One', sans-serif;
-  font-size: 24px;
-  color: var(--white);
-  transition: transform 0.2s ease;
-}
-.card.solo:hover .card-arrow-wrap {
-  transform: rotate(45deg);
-  background: var(--ink);
+/* Big card variant for Create */
+.card.big {
+  min-height: 320px;
+  grid-column: span 2;
 }
 
-/* PWA install banner */
-.pwa-banner {
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  max-width: 480px;
-  margin: 0 auto;
-  background: var(--ink);
-  color: var(--white);
-  border: 3px solid var(--ink);
-  padding: 14px 18px;
-  display: none;
-  align-items: center;
-  gap: 12px;
-  z-index: 100;
-  box-shadow: 6px 6px 0 var(--hot-pink);
-  font-family: 'Space Mono', monospace;
-  font-size: 13px;
-}
-.pwa-banner.show { display: flex; }
-.pwa-banner .banner-msg { flex: 1; }
-.pwa-banner button {
-  background: var(--lime);
-  color: var(--ink);
-  border: 2px solid var(--lime);
-  padding: 6px 12px;
-  font-family: 'Bowlby One', sans-serif;
-  font-size: 12px;
-  cursor: pointer;
-  letter-spacing: 0.05em;
-}
-.pwa-banner .banner-close {
-  background: transparent;
-  color: var(--white);
-  border: 2px solid rgba(255,255,255,0.3);
+.card.big .card-title {
+  font-size: 64px;
+  margin: 24px 0 16px;
 }
 
-/* Footer */
+.card.big .card-desc {
+  font-size: 15px;
+  max-width: 400px;
+}
+
+/* Quote card */
+.card.quote {
+  background: var(--ink);
+  color: var(--white);
+  pointer-events: none;
+}
+
+.card.quote .card-title {
+  font-family: 'Reggae One', sans-serif;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--sun);
+}
+
+/* ====== FOOTER ====== */
 .footer {
   margin-top: 80px;
   background: var(--ink);
@@ -610,13 +652,19 @@ body::before {
   z-index: 2;
   border-top: 6px solid var(--hot-pink);
 }
-.footer-inner { max-width: 1400px; margin: 0 auto; }
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .footer-top {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 48px;
   margin-bottom: 48px;
 }
+
 .footer-brand {
   font-family: 'Anton', sans-serif;
   font-size: 48px;
@@ -624,8 +672,10 @@ body::before {
   text-transform: uppercase;
   letter-spacing: -0.02em;
 }
+
 .footer-brand .pink { color: var(--hot-pink); }
 .footer-brand .sun { color: var(--sun); }
+
 .footer-tag {
   font-family: 'RocknRoll One', sans-serif;
   font-weight: 400;
@@ -635,20 +685,30 @@ body::before {
   max-width: 340px;
   line-height: 1.6;
 }
+
 .footer-col h4 {
   font-family: 'Bowlby One', sans-serif;
   font-size: 18px;
   color: var(--lime);
   margin-bottom: 16px;
 }
-.footer-col ul { list-style: none; }
+
+.footer-col ul {
+  list-style: none;
+}
+
 .footer-col li {
   font-family: 'Space Mono', monospace;
   font-size: 12px;
   margin-bottom: 8px;
   color: rgba(255,255,255,0.8);
 }
-.footer-col li::before { content: '▸ '; color: var(--hot-pink); }
+
+.footer-col li::before {
+  content: '▸ ';
+  color: var(--hot-pink);
+}
+
 .footer-bottom {
   border-top: 2px solid rgba(255,255,255,0.15);
   padding-top: 24px;
@@ -660,14 +720,16 @@ body::before {
   letter-spacing: 0.1em;
 }
 
-/* Animations */
+/* ====== ANIMATIONS ====== */
 @keyframes pop {
   0% { opacity: 0; transform: translateY(20px) scale(0.95); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
+
 .hero-label, .hero-title, .hero-desc, .hero-stats, .search-wrap {
   animation: pop 0.6s ease both;
 }
+
 .hero-title { animation-delay: 0.1s; }
 .hero-desc { animation-delay: 0.2s; }
 .hero-stats { animation-delay: 0.3s; }
@@ -679,42 +741,53 @@ body::before {
 }
 
 @keyframes wiggle {
-  0%, 100% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(-4deg) scale(1.05); }
-  75% { transform: rotate(4deg) scale(1.05); }
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
 }
-.logo-mark:hover { animation: wiggle 0.4s ease; }
 
-/* Responsive */
+.logo-mark:hover {
+  animation: wiggle 0.4s ease;
+}
+
+/* ====== RESPONSIVE ====== */
 @media (max-width: 1024px) {
-  .cards { grid-template-columns: repeat(2, 1fr); }
+  .cards, .cards.three, .cards.four, .cards.five {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card.big { grid-column: span 2; }
   .hero-bottom { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
 }
+
 @media (max-width: 640px) {
   .header { padding: 14px 16px; }
   .hero { padding: 40px 16px 24px; }
   .container { padding: 0 16px; }
   .search-section { padding: 0 16px 32px; }
   .footer { padding: 48px 16px 24px; }
-  .cards, .cards.two {
+
+  .cards, .cards.three, .cards.four, .cards.five {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+  .card.big { grid-column: span 1; min-height: 240px; }
+  .card.big .card-title { font-size: 44px; }
+
   .section { padding: 40px 0; }
   .section-header { gap: 12px; }
   .section-num { font-size: 40px; }
   .hero-title .row2, .hero-title .row3 { margin-left: 0; }
   .card { min-height: 180px; padding: 18px 16px; }
-  .card-title { font-size: 24px; }
-  .card.solo { flex-direction: column; align-items: flex-start; }
-  .card.solo .card-title { font-size: 36px; }
+  .card-title { font-size: 26px; }
+
   .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .stat-num { font-size: 32px; }
+
   .footer-brand { font-size: 36px; }
   .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
 }
 
+/* Selection */
 ::selection {
   background: var(--hot-pink);
   color: var(--white);
@@ -726,24 +799,24 @@ body::before {
 <!-- Ticker -->
 <div class="ticker">
   <div class="ticker-track">
-    <span>★ SHIZUOKA PORTAL</span><span class="dot">●</span>
-    <span>DAILY OPS HUB</span><span class="dot">●</span>
-    <span>WEST AREA COMMAND</span><span class="dot">●</span>
-    <span>2025 EDITION</span><span class="dot">●</span>
-    <span>★ SHIZUOKA PORTAL</span><span class="dot">●</span>
-    <span>DAILY OPS HUB</span><span class="dot">●</span>
-    <span>WEST AREA COMMAND</span><span class="dot">●</span>
-    <span>2025 EDITION</span><span class="dot">●</span>
+    <span>★ SHIZUOKA LEARNING PORTAL</span><span class="dot">●</span>
+    <span>HARAJUKU EDITION VOL.01</span><span class="dot">●</span>
+    <span>NEW DROP 2025</span><span class="dot">●</span>
+    <span>AI × VIBE × LEARNING</span><span class="dot">●</span>
+    <span>★ SHIZUOKA LEARNING PORTAL</span><span class="dot">●</span>
+    <span>HARAJUKU EDITION VOL.01</span><span class="dot">●</span>
+    <span>NEW DROP 2025</span><span class="dot">●</span>
+    <span>AI × VIBE × LEARNING</span><span class="dot">●</span>
   </div>
 </div>
 
 <!-- Header -->
 <header class="header">
   <div class="logo">
-    <div class="logo-mark"><span>S</span></div>
+    <div class="logo-mark">S</div>
     <div class="logo-text">
       SHIZUOKA
-      <span class="small">PORTAL ★ DAILY OPS</span>
+      <span class="small">LEARNING PORTAL ★</span>
     </div>
   </div>
   <div class="header-right">
@@ -755,28 +828,30 @@ body::before {
 <!-- Hero -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-label">▶ DAILY OPS / 2025</div>
+    <div class="hero-label">▶ ISSUE 01 / 2025</div>
+
     <h1 class="hero-title">
-      <span class="row1">OPEN.</span>
-      <span class="row2">WORK.</span>
-      <span class="row3">DONE!</span>
+      <span class="row1">LEARN.</span>
+      <span class="row2">MAKE.</span>
+      <span class="row3">REPEAT!</span>
     </h1>
+
     <div class="hero-bottom">
       <div class="hero-desc">
-        静岡支社の<mark>業務ハブ</mark>。マスター、勤怠、FAS、ショートカット、カレンダー—毎日使うリンクを、ぜんぶ一画面に集約★
+        静岡エリアのスタッフ向け学習ポータル。<mark>生成AI、AIエージェント、AIスキル</mark>—現場で使える知識とツールを、ぜんぶ詰め込んでお届け★
       </div>
       <div class="hero-stats">
         <div class="stat-box">
-          <div class="stat-num">07</div>
+          <div class="stat-num">06</div>
           <div class="stat-label">CATEGORY</div>
         </div>
         <div class="stat-box">
-          <div class="stat-num">18</div>
-          <div class="stat-label">SHORTCUTS</div>
+          <div class="stat-num">19</div>
+          <div class="stat-label">RESOURCE</div>
         </div>
         <div class="stat-box">
           <div class="stat-num">∞</div>
-          <div class="stat-label">DAILY</div>
+          <div class="stat-label">LEARN</div>
         </div>
       </div>
     </div>
@@ -787,300 +862,333 @@ body::before {
 <section class="search-section">
   <div class="search-wrap">
     <div class="search-icon">SEARCH ▶</div>
-    <input type="text" class="search-input" id="searchInput" placeholder="三島, 富士, ジョブカン, FAS... なんでも検索!">
+    <input type="text" class="search-input" id="searchInput" placeholder="ChatGPT, MCP, docomo... なんでも検索!">
     <div class="search-hint">⌘ K</div>
   </div>
 </section>
 
 <div class="container">
 
-  <!-- Master -->
-  <section class="section" id="master">
+  <!-- Generative AI -->
+  <section class="section" id="gen-ai">
     <div class="section-header">
       <div class="section-num">01</div>
-      <h2 class="section-title"><span class="accent">MASTER</span></h2>
-      <div class="section-jp">マスター</div>
-      <div class="section-count">▶ 03 ITEMS</div>
+      <h2 class="section-title">GENERATIVE <span class="accent">AI</span></h2>
+      <div class="section-jp">生成AI</div>
+      <div class="section-count">▶ 05 ITEMS</div>
     </div>
-    <div class="cards" data-grid>
-      <a href="https://drive.google.com/drive/u/0/folders/16W_awpa2EqjdFFCH9Hlq2MbrekfAUqiU" target="_blank" rel="noopener" class="card v-pink" data-name="branch shizuoka">
+    <div class="cards five" data-grid>
+      <a href="https://chatgpt.serizawamo.workers.dev/" target="_blank" class="card v-sun" data-name="chatgpt openai">
         <div class="card-top">
-          <span class="card-no">01/03</span>
+          <span class="card-no">01/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">静岡<br>Branch</h3>
-          <p class="card-desc">静岡支社の共有ドライブ。支社全体の資料置き場。</p>
-          <span class="card-tag">GOOGLE DRIVE</span>
+          <h3 class="card-title">ChatGPT</h3>
+          <p class="card-desc">OpenAIの汎用対話AI。情報整理と文章生成の基礎。</p>
+          <span class="card-tag">OPENAI · LLM</span>
         </div>
       </a>
-      <a href="https://drive.google.com/drive/u/0/folders/1P6zOzKkE16aCZRNPgrtzOGFzkl1lH51c" target="_blank" rel="noopener" class="card v-blue" data-name="mishima base">
+      <a href="https://claude.serizawamo.workers.dev/" target="_blank" class="card v-orange" data-name="claude anthropic">
         <div class="card-top">
-          <span class="card-no">02/03</span>
+          <span class="card-no">02/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">SL三島<br>BASE</h3>
-          <p class="card-desc">三島BASE専用フォルダ。店舗資料・運用ドキュメント。</p>
-          <span class="card-tag">GOOGLE DRIVE</span>
+          <h3 class="card-title">Claude</h3>
+          <p class="card-desc">長文理解と思考整理に強み。当ポータル推奨★</p>
+          <span class="card-tag">ANTHROPIC · LLM</span>
         </div>
       </a>
-      <a href="https://drive.google.com/drive/u/0/folders/1KuaI9NfyjK6caRx4R5NgSIsxf7Q_DeXM" target="_blank" rel="noopener" class="card v-sun" data-name="fuji base">
+      <a href="https://gemini.serizawamo.workers.dev/" target="_blank" class="card v-blue" data-name="gemini google">
         <div class="card-top">
-          <span class="card-no">03/03</span>
+          <span class="card-no">03/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">SL富士<br>BASE</h3>
-          <p class="card-desc">富士BASE専用フォルダ。店舗資料・運用ドキュメント。</p>
-          <span class="card-tag">GOOGLE DRIVE</span>
+          <h3 class="card-title">Gemini</h3>
+          <p class="card-desc">Google製。検索とWorkspace連携が強力。</p>
+          <span class="card-tag">GOOGLE · LLM</span>
+        </div>
+      </a>
+      <a href="https://notebooklm.serizawamo.workers.dev/" target="_blank" class="card v-pink" data-name="notebooklm">
+        <div class="card-top">
+          <span class="card-no">04/05</span>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <h3 class="card-title">NotebookLM</h3>
+          <p class="card-desc">資料に基づく要約と質問応答。ソース連動型。</p>
+          <span class="card-tag">GOOGLE · RAG</span>
+        </div>
+      </a>
+      <a href="https://generative-ai-test.serizawamo.workers.dev/" target="_blank" class="card v-test" data-name="test generative">
+        <div class="card-top">
+          <span class="card-no">05/05</span>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <h3 class="card-title">Test</h3>
+          <p class="card-desc">生成AIカテゴリの検証用ページ。</p>
+          <span class="card-tag">TEST · BETA</span>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- Learning -->
-  <section class="section" id="learning">
+  <!-- AI Agent -->
+  <section class="section" id="agent">
     <div class="section-header">
       <div class="section-num">02</div>
-      <h2 class="section-title"><span class="accent">LEARNING</span></h2>
-      <div class="section-jp">学習</div>
-      <div class="section-count">▶ 03 ITEMS</div>
+      <h2 class="section-title">AI <span class="accent">AGENT</span></h2>
+      <div class="section-jp">自律実行</div>
+      <div class="section-count">▶ 04 ITEMS</div>
     </div>
-    <div class="cards" data-grid>
-      <a href="https://learning-portal-xi.vercel.app/" target="_blank" rel="noopener" class="card v-violet" data-name="learning portal">
+    <div class="cards four" data-grid>
+      <a href="https://codex.serizawamo.workers.dev/" target="_blank" class="card v-violet" data-name="codex openai">
         <div class="card-top">
-          <span class="card-no">01/03</span>
+          <span class="card-no">01/04</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">Learning<br>Portal</h3>
-          <p class="card-desc">学習リソース集約サイト。生成AI・スキル教材。</p>
-          <span class="card-tag">INTERNAL</span>
+          <h3 class="card-title">Codex</h3>
+          <p class="card-desc">OpenAIのコーディング特化エージェント。</p>
+          <span class="card-tag">OPENAI · AGENT</span>
         </div>
       </a>
-      <a href="https://au-portal.my.site.com/lms" target="_blank" rel="noopener" class="card v-orange" data-name="rasta au">
+      <a href="https://claude-cowork.serizawamo.workers.dev/" target="_blank" class="card v-lime" data-name="claude cowork">
         <div class="card-top">
-          <span class="card-no">02/03</span>
+          <span class="card-no">02/04</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">ラースタ</h3>
-          <p class="card-desc">au公式の学習・トレーニング管理システム。</p>
-          <span class="card-tag">AU · LMS</span>
+          <h3 class="card-title">Claude<br>Cowork</h3>
+          <p class="card-desc">非エンジニア向けのデスクトップ自動化ツール。</p>
+          <span class="card-tag">ANTHROPIC · AGENT</span>
         </div>
       </a>
-      <a href="https://c-tra.itc.softbank.jp/login" target="_blank" rel="noopener" class="card v-sun" data-name="kurutore softbank">
+      <a href="https://claude-code.serizawamo.workers.dev/" target="_blank" class="card v-ink" data-name="claude code">
         <div class="card-top">
-          <span class="card-no">03/03</span>
+          <span class="card-no">03/04</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">クル<br>トレ</h3>
-          <p class="card-desc">ソフトバンク向け接客トレーニングシステム。</p>
-          <span class="card-tag">SOFTBANK</span>
+          <h3 class="card-title">Claude<br>Code</h3>
+          <p class="card-desc">ターミナル直結。バイブコーディングの主役。</p>
+          <span class="card-tag">ANTHROPIC · CLI</span>
+        </div>
+      </a>
+      <a href="https://ai-agent-test.serizawamo.workers.dev/" target="_blank" class="card v-test" data-name="test agent">
+        <div class="card-top">
+          <span class="card-no">04/04</span>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <h3 class="card-title">Test</h3>
+          <p class="card-desc">AIエージェントカテゴリの検証用ページ。</p>
+          <span class="card-tag">TEST · BETA</span>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- Labor -->
-  <section class="section" id="labor">
+  <!-- AI Skill -->
+  <section class="section" id="skill">
     <div class="section-header">
       <div class="section-num">03</div>
-      <h2 class="section-title"><span class="accent">LABOR</span></h2>
-      <div class="section-jp">勤怠・労務</div>
-      <div class="section-count">▶ 03 ITEMS</div>
+      <h2 class="section-title">AI <span class="accent">SKILL</span></h2>
+      <div class="section-jp">活用技術</div>
+      <div class="section-count">▶ 05 ITEMS</div>
     </div>
-    <div class="cards" data-grid>
-      <a href="https://id.jobcan.jp/users/sign_in" target="_blank" rel="noopener" class="card v-blue" data-name="jobcan kintai">
+    <div class="cards five" data-grid>
+      <a href="https://prompt.serizawamo.workers.dev/" target="_blank" class="card v-pink" data-name="prompt">
         <div class="card-top">
-          <span class="card-no">01/03</span>
+          <span class="card-no">01/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">ジョブ<br>カン</h3>
-          <p class="card-desc">勤怠管理。打刻・申請・休暇管理。</p>
-          <span class="card-tag">勤怠</span>
+          <h3 class="card-title">Prompt</h3>
+          <p class="card-desc">プロンプト設計の基本と応用パターン。</p>
+          <span class="card-tag">FOUNDATION</span>
         </div>
       </a>
-      <a href="https://app.smarthr.jp/login" target="_blank" rel="noopener" class="card v-lime" data-name="smarthr roumu">
+      <a href="https://ai-expansion.serizawamo.workers.dev/" target="_blank" class="card v-blue" data-name="mcp">
         <div class="card-top">
-          <span class="card-no">02/03</span>
+          <span class="card-no">02/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">Smart<br>HR</h3>
-          <p class="card-desc">労務手続き・人事情報の管理。</p>
-          <span class="card-tag">労務</span>
+          <h3 class="card-title">MCP</h3>
+          <p class="card-desc">Model Context Protocol。AIに能力を拡張。</p>
+          <span class="card-tag">PROTOCOL</span>
         </div>
       </a>
-      <a href="https://service.kaonavi.jp/login" target="_blank" rel="noopener" class="card v-pink" data-name="kaonavi jinzai">
+      <a href="https://md.serizawamo.workers.dev/" target="_blank" class="card v-sun" data-name="agent.md">
         <div class="card-top">
-          <span class="card-no">03/03</span>
+          <span class="card-no">03/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">カオ<br>ナビ</h3>
-          <p class="card-desc">人材管理・評価・タレントマネジメント。</p>
-          <span class="card-tag">人材</span>
+          <h3 class="card-title">Agent.md</h3>
+          <p class="card-desc">エージェント向け指示書の書き方。</p>
+          <span class="card-tag">STANDARD</span>
+        </div>
+      </a>
+      <a href="https://skills.serizawamo.workers.dev/" target="_blank" class="card v-violet" data-name="skills">
+        <div class="card-top">
+          <span class="card-no">04/05</span>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <h3 class="card-title">Skills</h3>
+          <p class="card-desc">Claudeの能力をパッケージ化する仕組み。</p>
+          <span class="card-tag">ANTHROPIC</span>
+        </div>
+      </a>
+      <a href="https://ai-skill-test.serizawamo.workers.dev/" target="_blank" class="card v-test" data-name="test skill">
+        <div class="card-top">
+          <span class="card-no">05/05</span>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <h3 class="card-title">Test</h3>
+          <p class="card-desc">AIスキルカテゴリの検証用ページ。</p>
+          <span class="card-tag">TEST · BETA</span>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- FAS -->
-  <section class="section" id="fas">
+  <!-- Create -->
+  <section class="section" id="create">
     <div class="section-header">
       <div class="section-num">04</div>
-      <h2 class="section-title"><span class="accent">FAS</span></h2>
-      <div class="section-jp">機会損失・採用</div>
-      <div class="section-count">▶ 03 ITEMS</div>
+      <h2 class="section-title"><span class="accent">CREATE</span></h2>
+      <div class="section-jp">制作</div>
+      <div class="section-count">▶ 01 ITEM</div>
     </div>
-    <div class="cards" data-grid>
-      <a href="https://docs.google.com/spreadsheets/d/1yepzlfQn24PBVvRDQyIrRE5RN9fRhKZc/edit?usp=drive_link&ouid=105070422042537613200&rtpof=true&sd=true" target="_blank" rel="noopener" class="card v-violet" data-name="fas mishima">
+    <div class="cards" style="grid-template-columns: 2fr 1fr 1fr;" data-grid>
+      <a href="https://web-create.serizawamo.workers.dev/" target="_blank" class="card v-pink big" data-name="web create">
         <div class="card-top">
-          <span class="card-no">01/03</span>
+          <span class="card-no">01/01</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">FAS<br>三島</h3>
-          <p class="card-desc">三島BASEの機会損失データ記録シート。</p>
-          <span class="card-tag">SPREADSHEET</span>
+          <h3 class="card-title">WEB</h3>
+          <p class="card-desc">バイブコーディングでWebサイトを作る。HTML/JS/CSSの単一ファイル制作術★</p>
+          <span class="card-tag">VIBE CODING</span>
         </div>
       </a>
-      <a href="https://docs.google.com/spreadsheets/d/1ChQIBW0PrB7fmEMbKpX8TFhSsn4sHHBE/edit?usp=sharing&ouid=105070422042537613200&rtpof=true&sd=true" target="_blank" rel="noopener" class="card v-orange" data-name="fas fuji">
+      <div class="card v-lime" style="pointer-events: none;">
         <div class="card-top">
-          <span class="card-no">02/03</span>
-          <span class="card-arrow">↗</span>
+          <span class="card-no">MEMO</span>
         </div>
         <div>
-          <h3 class="card-title">FAS<br>富士</h3>
-          <p class="card-desc">富士BASEの機会損失データ記録シート。</p>
-          <span class="card-tag">SPREADSHEET</span>
+          <h3 class="card-title" style="font-size: 24px;">非エンジニアでも</h3>
+          <p class="card-desc">AIと対話しながら、実用ツールを作れる時代!</p>
         </div>
-      </a>
-      <a href="https://docs.google.com/spreadsheets/d/1E6xetCHG_9H4DxVEdijlTh4IGAtbB2oH/edit?gid=1672579620#gid=1672579620" target="_blank" rel="noopener" class="card v-ink" data-name="referral list">
+      </div>
+      <div class="card quote">
         <div class="card-top">
-          <span class="card-no">03/03</span>
-          <span class="card-arrow">↗</span>
+          <span class="card-no" style="background: var(--lime); color: var(--ink);">QUOTE</span>
         </div>
         <div>
-          <h3 class="card-title">リファ<br>ラル</h3>
-          <p class="card-desc">リファラル採用候補者リスト。</p>
-          <span class="card-tag">採用</span>
+          <h3 class="card-title">作ることで、<br>学ぶ。</h3>
+          <p class="card-desc" style="color: rgba(255,255,255,0.7);">— SLMC PHILOSOPHY</p>
         </div>
-      </a>
+      </div>
     </div>
   </section>
 
-  <!-- ShortCut -->
-  <section class="section" id="shortcut">
+  <!-- Mobile -->
+  <section class="section" id="mobile">
     <div class="section-header">
       <div class="section-num">05</div>
-      <h2 class="section-title">SHORT<span class="accent">CUT</span></h2>
-      <div class="section-jp">ショートカット</div>
-      <div class="section-count">▶ 03 ITEMS</div>
+      <h2 class="section-title"><span class="accent">MOBILE</span></h2>
+      <div class="section-jp">通信キャリア</div>
+      <div class="section-count">▶ 05 ITEMS</div>
     </div>
-    <div class="cards" data-grid>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8eYu8jZJs3goSR2nxmx5PVyHkF7RmsjUIn9jLpug17cIcIg/viewform" target="_blank" rel="noopener" class="card v-sun" data-name="nichiji houkoku">
+    <div class="cards five" data-grid>
+      <a href="https://docomo.serizawamo.workers.dev/" target="_blank" class="card v-pink" data-name="docomo">
         <div class="card-top">
-          <span class="card-no">01/03</span>
+          <span class="card-no">01/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">日次<br>報告</h3>
-          <p class="card-desc">日々の業務報告フォーム。</p>
-          <span class="card-tag">FORM</span>
+          <h3 class="card-title">docomo</h3>
+          <p class="card-desc">NTTドコモのプラン資料。</p>
+          <span class="card-tag">CARRIER</span>
         </div>
       </a>
-      <a href="https://meet.google.com/vgq-xrnv-hkw" target="_blank" rel="noopener" class="card v-lime" data-name="google meet">
+      <a href="https://au.serizawamo.workers.dev/" target="_blank" class="card v-orange" data-name="au kddi">
         <div class="card-top">
-          <span class="card-no">02/03</span>
+          <span class="card-no">02/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">Meet</h3>
-          <p class="card-desc">静岡支社専用ミーティングルーム。</p>
-          <span class="card-tag">GOOGLE MEET</span>
+          <h3 class="card-title">au</h3>
+          <p class="card-desc">KDDIのプラン資料。</p>
+          <span class="card-tag">CARRIER</span>
         </div>
       </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScWWxWfHAjY-hJI6oX_OOUMM9TM0FDnjSW84IwLPa0F3i4yJg/viewform" target="_blank" rel="noopener" class="card v-pink" data-name="ai kansa jishu">
+      <a href="https://softbank.serizawamo.workers.dev/" target="_blank" class="card v-sun" data-name="softbank">
         <div class="card-top">
-          <span class="card-no">03/03</span>
+          <span class="card-no">03/05</span>
           <span class="card-arrow">↗</span>
         </div>
         <div>
-          <h3 class="card-title">AI<br>自主監査</h3>
-          <p class="card-desc">AI活用の自主点検フォーム。</p>
-          <span class="card-tag">FORM</span>
+          <h3 class="card-title">Soft<br>bank</h3>
+          <p class="card-desc">ソフトバンクのプラン資料。</p>
+          <span class="card-tag">CARRIER</span>
+        </div>
+      </a>
+      <a href="https://rakuten.serizawamo.workers.dev/" target="_blank" class="card v-violet" data-name="rakuten">
+        <div class="card-top">
+          <span class="card-no">04/05</span>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <h3 class="card-title">Rakuten</h3>
+          <p class="card-desc">楽天モバイルのプラン資料。</p>
+          <span class="card-tag">CARRIER</span>
+        </div>
+      </a>
+      <a href="https://mobile-simulator.serizawamo.workers.dev/" target="_blank" class="card v-ink" data-name="simulator">
+        <div class="card-top">
+          <span class="card-no">05/05</span>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <h3 class="card-title">Simu<br>lator</h3>
+          <p class="card-desc">料金シミュレーター。比較・試算ツール★</p>
+          <span class="card-tag">TOOL</span>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- Calendar -->
-  <section class="section" id="calendar">
+  <!-- PC DEPOT -->
+  <section class="section" id="pcdepot">
     <div class="section-header">
       <div class="section-num">06</div>
-      <h2 class="section-title"><span class="accent">CALENDAR</span></h2>
-      <div class="section-jp">イベント</div>
-      <div class="section-count">▶ 02 ITEMS</div>
-    </div>
-    <div class="cards two" data-grid>
-      <a href="https://slmc-mishima.studio.site/#calendar" target="_blank" rel="noopener" class="card v-blue" data-name="calendar mishima">
-        <div class="card-top">
-          <span class="card-no">01/02</span>
-          <span class="card-arrow">↗</span>
-        </div>
-        <div>
-          <h3 class="card-title">三島<br>カレンダー</h3>
-          <p class="card-desc">三島BASEのイベントスケジュール。</p>
-          <span class="card-tag">EVENT</span>
-        </div>
-      </a>
-      <a href="https://smartlife-fuji.studio.site/#calendar" target="_blank" rel="noopener" class="card v-orange" data-name="calendar fuji">
-        <div class="card-top">
-          <span class="card-no">02/02</span>
-          <span class="card-arrow">↗</span>
-        </div>
-        <div>
-          <h3 class="card-title">富士<br>カレンダー</h3>
-          <p class="card-desc">富士BASEのイベントスケジュール。</p>
-          <span class="card-tag">EVENT</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- Tool -->
-  <section class="section" id="tool">
-    <div class="section-header">
-      <div class="section-num">07</div>
-      <h2 class="section-title"><span class="accent">TOOL</span></h2>
-      <div class="section-jp">ツール</div>
+      <h2 class="section-title">PC <span class="accent">DEPOT</span></h2>
+      <div class="section-jp">社内</div>
       <div class="section-count">▶ 01 ITEM</div>
     </div>
     <div class="cards one" data-grid>
-      <a href="https://presence-app-eight.vercel.app/dashboard/board" target="_blank" rel="noopener" class="card v-lime solo" data-name="presence dashboard">
-        <div class="card-content">
-          <span class="card-no">INTERNAL · 01/01</span>
-          <h3 class="card-title">Presence</h3>
-          <p class="card-desc">プレゼンス管理ダッシュボード。出社状況の見える化★</p>
-          <span class="card-tag">DASHBOARD</span>
+      <a href="https://pcdepot-wiki.serizawamo.workers.dev/" target="_blank" class="card v-lime" data-name="pcdepot wiki" style="min-height: 200px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%;">
+          <div>
+            <span class="card-no">INTERNAL · 01/01</span>
+            <h3 class="card-title" style="font-size: 56px; margin-top: 16px;">Wiki</h3>
+            <p class="card-desc" style="margin-top: 8px;">PC DEPOT社内向けナレッジベース。業務手順・FAQ・規程の参照ポイント★</p>
+          </div>
+          <span class="card-arrow" style="width: 64px; height: 64px; font-size: 24px;">↗</span>
         </div>
-        <div class="card-arrow-wrap">↗</div>
       </a>
     </div>
   </section>
 
-</div>
-
-<!-- PWA install prompt -->
-<div class="pwa-banner" id="pwaBanner">
-  <span class="banner-msg">★ ホーム画面に追加でアプリ化できます</span>
-  <button id="pwaInstallBtn">INSTALL</button>
-  <button class="banner-close" id="pwaCloseBtn">✕</button>
 </div>
 
 <!-- Footer -->
@@ -1090,35 +1198,34 @@ body::before {
       <div>
         <div class="footer-brand">
           SHIZUOKA<br>
-          <span class="pink">PORTAL</span><br>
-          <span class="sun">★ DAILY OPS</span>
+          <span class="pink">LEARNING</span><br>
+          <span class="sun">PORTAL ★</span>
         </div>
-        <p class="footer-tag">PC DEPOT 静岡支社 発信。<br>毎日の業務を一画面に集約するハブ。</p>
+        <p class="footer-tag">PC DEPOT 静岡支社 発信。<br>現場で使えるAI活用のための学習ハブ。</p>
       </div>
       <div class="footer-col">
         <h4>SECTIONS</h4>
         <ul>
-          <li>Master</li>
-          <li>Learning</li>
-          <li>Labor</li>
-          <li>FAS</li>
-          <li>ShortCut</li>
-          <li>Calendar</li>
-          <li>Tool</li>
+          <li>Generative AI</li>
+          <li>AI Agent</li>
+          <li>AI Skill</li>
+          <li>Create</li>
+          <li>Mobile</li>
+          <li>PC DEPOT</li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>INFO</h4>
         <ul>
+          <li>SLMC Management</li>
           <li>Shizuoka Branch</li>
           <li>Western Japan</li>
-          <li>PWA Ready ★</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 SHIZUOKA PORTAL</span>
-      <span>v.1.0 ★ DAILY OPS HUB</span>
+      <span>© 2025 SLMC / SHIZUOKA LEARNING PORTAL</span>
+      <span>v.2.0 ★ HARAJUKU EDITION</span>
     </div>
   </div>
 </footer>
@@ -1136,7 +1243,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Card stagger animation
+// Card stagger
 document.querySelectorAll('.card').forEach((card, i) => {
   card.style.animationDelay = `${0.04 * (i % 6) + 0.2}s`;
 });
@@ -1153,7 +1260,7 @@ searchInput.addEventListener('input', (e) => {
   });
 });
 
-// Keyboard shortcuts
+// Shortcuts
 document.addEventListener('keydown', (e) => {
   if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
     e.preventDefault();
@@ -1164,54 +1271,6 @@ document.addEventListener('keydown', (e) => {
     searchInput.dispatchEvent(new Event('input'));
     searchInput.blur();
   }
-});
-
-// ============================================
-// PWA: Service Worker registration
-// ============================================
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js')
-      .then((reg) => console.log('✓ SW registered:', reg.scope))
-      .catch((err) => console.error('✗ SW registration failed:', err));
-  });
-}
-
-// ============================================
-// PWA: Install prompt (Chromium系のみ)
-// iOSは「ホーム画面に追加」を手動で案内する必要がある
-// ============================================
-let deferredPrompt = null;
-const banner = document.getElementById('pwaBanner');
-const installBtn = document.getElementById('pwaInstallBtn');
-const closeBtn = document.getElementById('pwaCloseBtn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  // 既に閉じた履歴があれば表示しない
-  if (sessionStorage.getItem('pwa-banner-closed') !== '1') {
-    banner.classList.add('show');
-  }
-});
-
-installBtn.addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  console.log(`PWA install: ${outcome}`);
-  deferredPrompt = null;
-  banner.classList.remove('show');
-});
-
-closeBtn.addEventListener('click', () => {
-  banner.classList.remove('show');
-  sessionStorage.setItem('pwa-banner-closed', '1');
-});
-
-window.addEventListener('appinstalled', () => {
-  console.log('✓ PWA installed');
-  banner.classList.remove('show');
 });
 </script>
 
